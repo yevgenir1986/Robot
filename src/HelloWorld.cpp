@@ -1,4 +1,5 @@
 #include <iostream>
+#include "RobotAlgorithm.h"
 
 int main() {
 	std::cout << "Hello World!" << std::endl;

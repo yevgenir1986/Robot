@@ -6,8 +6,7 @@
 #define ROBOT_SENSORS_H
 
 #include "common.h"
-
-class House {};
+#include "House.h"
 
 class WallSensor {
     bool isWall(Direction d) const;

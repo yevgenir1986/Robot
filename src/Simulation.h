@@ -9,8 +9,6 @@
 #include "RobotAlgorithm.h"
 #include "Sensors.h"
 
-class House {};
-
 class Simulation {
 private:
     std::vector <RobotAlgorithm> _algos;
@@ -23,7 +21,7 @@ public:
 
 class SimulationRobotRep
 {
-    SimulationRobotRep(const House& h): _ws(h), _ds(h), _bs(h) {};
+    SimulationRobotRep(const House& h): _ws(h), _ds(h), _bs(h.max_steps()) {};
     const WallSensor& getWallSensor() const;
     const DirtSensor& getDirtSensor() const;
     const BatterySensor& getBatterySensor() const;

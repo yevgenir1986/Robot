@@ -11,10 +11,6 @@
 #include <iostream>
 #include "Sensors.h"
 
-//const std::string name = "Our Robot";
-//const std::string description = "This is the greatest robot ever";
-
-
 class RobotAlgorithm {
 public:
     template<typename RobotRep>
@@ -30,14 +26,16 @@ public:
         _battery_sensor = robot.getBatterySensor();
     }
     virtual Direction nextStep(Direction lastMove, bool& finish);
-    virtual const std::string& getName() const;
-    virtual const std::string& getDescription() const;
+    virtual const std::string& getName() const { return name;}
+    virtual const std::string& getDescription() const { return description;}
 
 protected:
     int _max_steps = 0;
     WallSensor _wall_sensor;
     DirtSensor _dirt_sensor;
     BatterySensor _battery_sensor;
+    const std::string name = "Our Robot";
+    const std::string description = "This is the greatest robot ever";
 };
 
 #endif //ROBOT_ROBOTALGORITHM_H

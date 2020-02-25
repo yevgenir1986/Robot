@@ -21,7 +21,7 @@ class BatterySensor {
 };
 
 
-class SimWallSensor: WallSensor
+class SimWallSensor: public WallSensor
 {
 public:
    SimWallSensor(const House& h): _house(h) {};
@@ -32,7 +32,7 @@ private:
     House _house;
 };
 
-class SimDirtSensor: DirtSensor
+class SimDirtSensor: public DirtSensor
 {
 public:
     SimDirtSensor(const House& h): _house(h) {};
@@ -43,7 +43,7 @@ private:
     House _house;
 };
 
-class SimBatterySensor: BatterySensor
+class SimBatterySensor: public BatterySensor
 {
 public:
     SimBatterySensor(int maxSteps): _batteryCapacity(BATTERY_CAPACITY),

@@ -11,9 +11,9 @@ class SimulationRobotRep
 {
 public:
     SimulationRobotRep(const House& h): _ws(h), _ds(h), _bs(h.max_steps()) {}
-    WallSensor& getWallSensor();
-    DirtSensor& getDirtSensor();
-    BatterySensor& getBatterySensor();
+    WallSensor& getWallSensor() { return _ws; };
+    DirtSensor& getDirtSensor() { return _ds; };
+    BatterySensor& getBatterySensor() { return _bs; };
 
 private:
     SimWallSensor _ws;

@@ -8,24 +8,36 @@
 #include <stdint.h>
 #include <map>
 #include "common.h"
+#include <iostream>
+#include "Sensors.h"
 
-const std::string name = "Our Robot";
-const std::string description = "This is the greatest robot ever";
+//const std::string name = "Our Robot";
+//const std::string description = "This is the greatest robot ever";
 
 
 class RobotAlgorithm {
 public:
     template<typename RobotRep>
-    void init(RobotRep &robot, std::map<std::string, int> config) {
+    void init(RobotRep &robot, std::map<std::string, int> config)
+    {
         if (config.find("MAX_STEPS") != config.end())
+        {
             _max_steps = config["MAX_STEPS"];
+        }
+        std::cout << "init new robot with max_steps: " << _max_steps << std::endl;
+        _wall_sensor = robot.getWallSensor();
+        _dirt_sensor = robot.getDirtSensor();
+        _battery_sensor = robot.getBatterySensor();
     }
-    Direction nextStep(Direction lastMove, bool& finish);
-    const std::string& getName() const { return name;}
-    const std::string& getDescription() const { return description; }
+    virtual Direction nextStep(Direction lastMove, bool& finish);
+    virtual const std::string& getName() const;
+    virtual const std::string& getDescription() const;
 
-private:
-    int _max_steps;
+protected:
+    int _max_steps = 0;
+    WallSensor _wall_sensor;
+    DirtSensor _dirt_sensor;
+    BatterySensor _battery_sensor;
 };
 
 #endif //ROBOT_ROBOTALGORITHM_H

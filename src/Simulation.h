@@ -16,21 +16,10 @@ private:
 
 public:
     void run_simulation();
-    void run_single_simulation(RobotAlgorithm alg, const House& h);
+    void run_single_simulation(RobotAlgorithm alg, House& h);
 };
 
-class SimulationRobotRep
-{
-    SimulationRobotRep(const House& h): _ws(h), _ds(h), _bs(h.max_steps()) {};
-    const WallSensor& getWallSensor() const;
-    const DirtSensor& getDirtSensor() const;
-    const BatterySensor& getBatterySensor() const;
 
-private:
-    SimWallSensor _ws;
-    SimDirtSensor _ds;
-    SimBatterySensor _bs;
-};
 
 
 #endif //ROBOT_SIMULATION_H

@@ -29,6 +29,8 @@ public:
 		}
 	}
 private:
+    bool isWall(size_t idx) const;
+
 	std::vector<int> _floor;
 	std::string _desc = "";
 	size_t _num_rows = 0;

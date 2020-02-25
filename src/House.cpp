@@ -59,6 +59,7 @@ House::House(const std::string& filename)
 			if (c == 'D')
 			{
 				_floor[idx] = -2;
+				_current_pos = idx;
 				continue;
 			}
 		}
@@ -67,44 +68,62 @@ House::House(const std::string& filename)
 
 void House::move(Direction d)
 {
+    size_t new_idx;
 	switch (d)
 	{
     case Direction::UP:
-		if (_current_pos > _num_cols)
-		{
-			_current_pos -= _num_cols;
-		}
+        new_idx = _current_pos - _num_cols;
+        if (!isWall(new_idx))
+        {
+            _current_pos = new_idx;
+            clean();
+        }
 		break;
 	case Direction::DOWN:
-		if (_current_pos > _num_rows)
-		{
-			_current_pos -= _num_cols;
-		}
+        new_idx = _current_pos + _num_cols;
+        if (!isWall(new_idx))
+        {
+            _current_pos = new_idx;
+            clean();
+        }
 		break;
     case Direction::LEFT:
-        //TODO: fill it
+        new_idx = _current_pos - 1;
+        if (!isWall(new_idx))
+        {
+            _current_pos = new_idx;
+            clean();
+        }
         break;
     case Direction::RIGHT:
-        //TODO: fill it
+        new_idx = _current_pos + 1;
+        if (!isWall(new_idx))
+        {
+            _current_pos = new_idx;
+            clean();
+        }
         break;
     case Direction::STAY:
-        //TODO: fill it
+        clean();
         break;
 	}
 }
 
 bool House::isWall() const
 {
+    return isWall(_current_pos);
+}
+bool House::isWall(size_t idx) const
+{
 //	int idx = row * _num_rows + col;
-//	return (_floor[idx] == -1);
-return true;
+	return (_floor[_current_pos] == -1);
 }
 
 int House::isDirty() const
 {
 //	int idx = row * _num_rows + col;
-//	int dirt_level = std::min(_floor[idx], 0);
-//	return dirt_level;
+	int dirt_level = std::min(_floor[_current_pos], 0);
+	return dirt_level;
 return 0;
 }
 
@@ -112,12 +131,12 @@ void House::clean()
 {
 //	int idx = row * _num_rows + col;
 //
-//	int& dirt_level = _floor[idx];
-//	if (dirt_level > 0)
-//	{
-//		--dirt_level;
-//		--_total_dirt_level;
-//	}
+	int& dirt_level = _floor[_current_pos];
+	if (dirt_level > 0)
+	{
+		--dirt_level;
+		--_total_dirt_level;
+	}
 }
 
 int House::total_dirt_level() const
